@@ -27,14 +27,19 @@ router.post('/',
     [
         validateJWT,
         check('hospital',"Hospital field is necessary").not().isEmpty(),
-        check('hospital',"Hospital id need to be valid").isMongoId(),
+        check('hospital',"Hospital id needs to be valid").isMongoId(),
         check('name',"Doctor name field is necessary").not().isEmpty(),
         validateFields
     ],
     createMedic)
 
 router.put('/:id',
-    [],
+    [
+    validateJWT,
+    check('hospital',"Hospital field is necessary").not().isEmpty(),
+    check('hospital',"Hospital id needs to be valid").isMongoId(),
+    validateFields
+    ],
     updateMedic)
 
 router.delete('/:id',deleteMedic)
